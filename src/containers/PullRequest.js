@@ -14,12 +14,12 @@ class PullRequest extends Component {
     console.log(this.props);
     return (
       <div>
-        <h2 align="center"> Issues </h2>
+        <h2 align="center"> Pull Request </h2>
         <div className="container ">
           <table className="table table-hover table-bordered">
             <thead>
               <tr>
-                <th>Issue Number</th>
+                <th>Pull Request ID</th>
                 <th>Title</th>
                 <th>Username</th>
                 <th>Created On</th>
@@ -31,7 +31,19 @@ class PullRequest extends Component {
                 return (
                   <tr key={i}>
                     <td>
+                      {pullrequest.number}
+                    </td>
+                    <td>
+                      {pullrequest.title}
+                    </td>
+                    <td>
                       {pullrequest.user.login}
+                    </td>
+                    <td>
+                      {pullrequest.created_at}
+                    </td>
+                    <td>
+                      {pullrequest.updated_at}
                     </td>
                   </tr>
                 );
@@ -46,7 +58,7 @@ class PullRequest extends Component {
 
 const mapStateToProps = state => {
   return {
-    PullRequestActions: state.PullRequest
+    PullRequest: state.PullRequest.PullRequest
   };
 };
 

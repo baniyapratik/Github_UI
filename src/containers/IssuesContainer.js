@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import IssuesChart from './IssuesChart';
 import * as issueActions from '../actions/issues.js';
 
 class IssuesClass extends Component {
@@ -10,8 +11,48 @@ class IssuesClass extends Component {
       this.props.match.params.repo
     );
   }
+  constructor() {
+    super();
+    this.state = {
+      chartData: {}
+    };
+  }
+  getChartData() {
+    //call here
+    this.setState({
+      chartData: {
+        labels: [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday'
+        ],
+        datasets: [
+          {
+            label: 'Population',
+            data: [10, 3, 4, 5, 6, 7, 8],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 99, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(123, 55, 132, 0.6)'
+            ]
+          }
+        ]
+      }
+    });
+  }
+  componentWillMount() {
+    this.getChartData();
+  }
   render() {
-    console.log(this.props);
+    let value = this.props;
     return (
       <div>
         <h2 align="center"> Issues </h2>
@@ -26,6 +67,7 @@ class IssuesClass extends Component {
                 <th>Last Updated</th>
               </tr>
             </thead>
+
             <tbody>
               {this.props.issues.map((issue, i) => {
                 return (
@@ -50,6 +92,7 @@ class IssuesClass extends Component {
               })}
             </tbody>
           </table>
+          <IssuesChart chartData={this.state.chartData} />
         </div>
       </div>
     );
@@ -58,7 +101,7 @@ class IssuesClass extends Component {
 
 const mapStateToProps = state => {
   return {
-    issues: state.issues
+    issues: state.issues.issues
   };
 };
 

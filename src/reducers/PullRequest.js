@@ -13,6 +13,7 @@ function PullRequestReducer(state = initialState, action) {
   switch (action.type) {
     case 'PULL_REQUESTS_FETCH_SUCCESS': {
       PullRequest = action.payload;
+
       return { ...state, PullRequest };
       // return Object.assign({}, state, {
       //   issues: action.payload

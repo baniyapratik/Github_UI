@@ -10,6 +10,6 @@ const history = createHistory();
 const reactRouterMiddleware = routerMiddleware(history);
 
 export default createStore(
-  issuesReducer,
+  rootReducer,
   compose(applyMiddleware(thunk, reactRouterMiddleware))
 );
